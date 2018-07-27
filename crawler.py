@@ -13,7 +13,7 @@ def crawl(root, max_pages, restrict_domain=True):
     while current_page <= max_pages and len(pages) > 0:
         link_object = pages.pop(0)
         if restrict_domain and not same_domain(root_link, link_object): # handle traversal down foreign domains
-            print("    ****** Edge ******")
+            print("****** @Edge - will not traverse {} ******\n".format(link_object.url))
             continue
         page_object = parse_page(link_object.url)
         if not page_object: continue
