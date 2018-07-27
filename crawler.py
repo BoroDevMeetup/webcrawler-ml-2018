@@ -43,12 +43,12 @@ def same_domain(root, dest):
 # convert netloc to domain
 def netloc_to_domain(netloc):
     port_re = re.compile(":\d*")
-    netloc_noport = port_re.sub("",netloc)
+    netloc_noport = port_re.sub("",netloc) # remove port (if any)
     netloc_split = netloc_noport.split(".")
     if "com" in netloc_split: netloc_split.remove("com")
-    if "www" in netloc_split: netloc_split.remove("www")
-    return "".join(netloc_split)
-    
+    l = len(netloc_split)
+    if l == 1: return "".join(netloc_split) # if there is only one str in list, it is the domain
+    return netloc_split[-1] # else the last item is the domain
 
 # given a url returns a BeautifulSoup page object on success, else returns empty string
 def parse_page(url_str):
