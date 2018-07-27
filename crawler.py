@@ -5,7 +5,12 @@ from urllib.parse import urlparse
 import re
 import sys
 
-def crawl(root, max_pages, restrict_domain=True):
+def crawl(root, max_pages=None, restrict_domain=None):
+    # set defaults here to account for None being passed by argparse
+    if max_pages is None:
+        max_pages = 10
+    if restrict_domain is None:
+        restrict_domain = True
     Link = namedtuple("Link", "parent url title depth url_tuple")
     current_page = 1
     root_link = Link(parent="root",url=root,title="Root",depth=0,url_tuple=urlparse(root))
