@@ -5,12 +5,7 @@ from urllib.parse import urlparse
 import re
 import sys
 
-def crawl(root, max_pages=None, restrict_domain=None):
-    # set defaults here to account for None being passed by argparse
-    if max_pages is None:
-        max_pages = 10
-    if restrict_domain is None:
-        restrict_domain = True
+def crawl(root, max_pages, restrict_domain):
     Link = namedtuple("Link", "parent url title depth url_tuple")
     current_page = 1
     root_link = Link(parent="root",url=root,title="Root",depth=0,url_tuple=urlparse(root))
@@ -23,11 +18,13 @@ def crawl(root, max_pages=None, restrict_domain=None):
         page_object = parse_page(link_object.url)
         if not page_object: continue
         print("Links for {} page, '{}':\n".format(link_object.title,link_object.url))
-        for link in page_object.findAll("a"):
+        links_found = page_object.findAll("a")
+        for link in links_found:
             href = link.get("href")
             temp_link = Link(parent=link_object.url,url=href,title=link.string,depth=link_object.depth + 1,url_tuple=urlparse(href))
             print_stats(temp_link)
             pages.append(temp_link)
+        if len(links_found) == 0: print("    No links to display...\n")
         current_page += 1
     print("Current page is {} and max pages is {}".format(current_page - 1,max_pages))
     if current_page - 1 < max_pages: print("The number of pages requested is greater than the number of pages searched")
