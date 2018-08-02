@@ -69,4 +69,4 @@ def print_stats(link_object):
     print("    Tuple: {}\n".format(link_object.url_tuple))
 
 if __name__ == "__main__":
-    crawl('https://www.google.com',3)
+    crawl('https://www.google.com',3,True)
