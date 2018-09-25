@@ -26,6 +26,7 @@ https://www.meetup.com/BoroDev/
 1. CD into the repo
 2. Unzip test-site.zip
 3. Setup local webserver using: <pre>`python3 -m http.server`</pre>
-4. Run for pre-configured: <pre>`pipenv run python3 crawler.py`</pre> or <pre>`pipenv run python3 crawler.py <url-entry-point> --max_pages <number-of-pages> --restrict_domain <bool>`</pre>
+4. Setup the dependecies <pre>`pipenv install`</pre>
+4. Run for pre-configured: <pre>`pipenv run python3 crawler.py`</pre> or <pre>`pipenv run python3 . <url-entry-point> --max_pages <number-of-pages> --restrict_domain <bool>`</pre>
    * where *url-entry-point* is a URL (e.g. http://localhost:8000/test-site/a.html), *--max_pages* is an optional int, and *--restrict_domain* is an optional bool
-   * example: `pipenv run python3 crawler.py http://www.google.com --max_pages 3 --restrict_domain True`
+   * example: `pipenv run python3 . http://www.google.com --max_pages 3 --restrict_domain True`
